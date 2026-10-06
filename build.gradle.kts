@@ -47,9 +47,9 @@ pmd {
 dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter:6.1.1")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    // implementation("org.slf4j:slf4j-api:2.0.18")
-    // implementation("org.slf4j:slf4j-jdk14:2.0.18")
-    // implementation("io.qtjambi:qtjambi:6.11.1")
-    // implementation("org.apache.tika:tika:3.3.2")
-    // runtimeOnly("org.postgresql:postgresql:42.7.13")
+    implementation("org.slf4j:slf4j-api:2.0.18")
+    implementation("org.slf4j:slf4j-jdk14:2.0.18")
+    implementation("io.qtjambi:qtjambi:6.11.1")
+    implementation("org.apache.tika:tika:3.3.2")
+    runtimeOnly("org.postgresql:postgresql:42.7.13")
 }
