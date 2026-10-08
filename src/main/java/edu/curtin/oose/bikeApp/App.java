@@ -1,5 +1,6 @@
 package edu.curtin.oose.bikeApp;
 
+
 /**
  * Entry point into the application. To change the package, and/or the name of this class, make
  * sure to update the 'mainClass = ...' line in build.gradle.kts.
@@ -25,6 +26,14 @@ public class App
             // do them all (if any);
 
             // Sleep for 1 second -- actual Java code
+                try
+                {
+                    Thread.sleep(1000);  // milliseconds
+                }
+                catch(InterruptedException e)
+                {
+                    throw new AssertionError(e);
+                }
                 try
                 {
                     Thread.sleep(1000);  // milliseconds

@@ -19,6 +19,7 @@ public class BankObserver implements MessageObserver {
     
     @Override
     public void update(Message event)
+    public void update(Message event)
     {
         int currentCash = store.getCash();
         int newCash = currentCash;
