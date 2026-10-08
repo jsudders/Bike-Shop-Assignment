@@ -1,5 +1,5 @@
 package edu.curtin.oose.bikeApp;
-import java.io.*;
+import java.io.IOException;
 
 /**
  * Use this code to get started on Assignment 2. You are free to modify or replace this file as

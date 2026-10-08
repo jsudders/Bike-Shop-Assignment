@@ -1,5 +1,5 @@
 package edu.curtin.oose.bikeApp;
-import Mistletoe.*
+
 /**
  * Entry point into the application. To change the package, and/or the name of this class, make
  * sure to update the 'mainClass = ...' line in build.gradle.kts.
@@ -13,20 +13,30 @@ public class App
             Scenario scObject = new Scenario();
             while(System.in.available() == 0)  // <-- actual Java code
             {
+                String message = scObject.nextMessage();
+                while(message != null)
+                {
+                    if(MessageHandler.msgIsValid(message))
+                    {
+
+
+
+                    }
+                }
             // Pseudocode
             // show status;
             // check if anything needs to be done _at the present time_;
             // do them all (if any);
 
             // Sleep for 1 second -- actual Java code
-            try
-            {
-                Thread.sleep(1000);  // milliseconds
-            }
-            catch(InterruptedException e)
-            {
-                throw new AssertionError(e);
-            }
+                try
+                {
+                    Thread.sleep(1000);  // milliseconds
+                }
+                catch(InterruptedException e)
+                {
+                    throw new AssertionError(e);
+                }
 
             // Loop until the user presses Enter;
             // Perform one simulation “step” on each loop iteration;

@@ -1,6 +1,12 @@
 package edu.curtin.oose.bikeApp;  // <-- you can modify this
-import static au.djac.mistletoe.Mistletoe.*;
-
+import static edu.curtin.oose.bikeApp.mistletoe.Mistletoe.C;
+import static edu.curtin.oose.bikeApp.mistletoe.Mistletoe.Fn;
+import static edu.curtin.oose.bikeApp.mistletoe.Mistletoe.If;
+import edu.curtin.oose.bikeApp.mistletoe.Mistletoe.M;
+import static edu.curtin.oose.bikeApp.mistletoe.Mistletoe.MT;
+import static edu.curtin.oose.bikeApp.mistletoe.Mistletoe.Note;
+import static edu.curtin.oose.bikeApp.mistletoe.Mistletoe.V;
+import static edu.curtin.oose.bikeApp.mistletoe.Mistletoe.While;
 
 /**
  * DO NOT MODIFY THIS FILE (except as necessary to organise your packages). This is just a utility
@@ -67,6 +73,15 @@ public class Scenario
                             While(M.Rand.Lt(V("DROP_OFF_P"))).Do(
                                 C(
                                     "DROP-OFF ",
+                                    V("makeEmail").Call().With(
+                                        V("emails").Append(M.It),
+                                        M.It
+                                    )
+                                ).Join()
+                            ),
+                            While(M.Rand.Lt(V("PURCHASE_ONLINE_P"))).Do(
+                                C(
+                                    "PURCHASE-ONLINE ",
                                     V("makeEmail").Call().With(
                                         V("emails").Append(M.It),
                                         M.It
