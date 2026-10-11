@@ -14,4 +14,16 @@ public class AvailableState implements BikeState
     {
         
     }
+
+    @Override
+    public void serviceBike(Bike bike)
+    {
+
+    }
+
+    @Override
+    public void sellBike(Bike bike)
+    {
+        
+    }
 }

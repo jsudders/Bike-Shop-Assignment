@@ -13,5 +13,17 @@ public class OnHoldState implements BikeState{
     {
         
     }
+
+    @Override
+    public void serviceBike(Bike bike)
+    {
+
+    }
+
+    @Override
+    public void sellBike(Bike bike)
+    {
+        
+    }
     
 }
