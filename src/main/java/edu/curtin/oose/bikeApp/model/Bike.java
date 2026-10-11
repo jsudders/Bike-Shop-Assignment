@@ -5,20 +5,23 @@ public class Bike {
     private String customerEmail;
     private BikeState bikeState = new AvailableState();
     private int holdTime = 0;
+    private String bikeID;
 
-    public Bike(String inEmail, String message)
+    public Bike(String inEmail, String inBikeID)
     {
         this.customerEmail = inEmail;
+        this.bikeID = inBikeID;
+        this.bikeState = new AvailableState();
 
-        switch(message)
-        {
-            case "DROP-OFF":
-                this.bikeState = new ServiceState();
-                break;
-            case "PURCHASE-ONLINE":
-                this.bikeState = new OnHoldState();
-                break;
-        }
+        // switch(message)
+        // {
+        //     case "DROP-OFF":
+        //         this.bikeState = new ServiceState();
+        //         break;
+        //     case "PURCHASE-ONLINE":
+        //         this.bikeState = new OnHoldState();
+        //         break;
+        // }
     }
 
     public String getEmail()
@@ -29,6 +32,11 @@ public class Bike {
     public BikeState getState()
     {
         return bikeState;
+    }
+
+    public String getBikeID()
+    {
+        return bikeID;
     }
 
     public int getTime()
@@ -44,6 +52,17 @@ public class Bike {
     public void putOnHold()
     {
         bikeState.putOnHold(this);
+    }
+
+    public void serviceBike()
+    {
+        bikeState.serviceBike(this);
+    }
+
+    public boolean availableForPickup()
+    {
+        return (this.bikeState instanceof ServiceState) && (this.holdTime >= 2);
+        // if the bike is currently being serviced and the hold time is greater than 2
     }
     
 }
