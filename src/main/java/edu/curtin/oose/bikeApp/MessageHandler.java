@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import edu.curtin.oose.bikeApp.model.Bike;
 import edu.curtin.oose.bikeApp.model.Message;
 import edu.curtin.oose.bikeApp.view.MessageObserver;
 
@@ -37,46 +38,66 @@ public class MessageHandler {
     public void handleMessage(BikeStore store, String message)
     {
         String[] messageParts = message.strip().split(" ");
+        String email = "";
+        if(messageParts.length == 2)
+        {
+            email = messageParts[1];
+        }
 
-        Message event = new Message(messageParts[0], messageParts[1], null, false);
+        
+        Message event = new Message(messageParts[0], email, false);
+        
+
 
         switch(messageParts[0])
         {
-            case "DELIVERY":
+            case "DELIVERY" -> {
                 if((store.getTotalBikes() <= 90) && (store.getCash() >= 10000))
                 {
-                    event.success = true;
-                    event.email = "";
+                    event.setSuccess(true);
+                    event.setEmail(""); // no email needed
                 }
-                break;
-            case "DROP-OFF":
+            }
+            case "DROP-OFF" -> {
                 if((store.getTotalBikes() <= 99))
                 {
-                    event.success = true;
+                    event.setSuccess(true);
                 }
-                break;
-            case "PURCHASE-ONLINE": case "PURCHASE-IN-STORE": // may need to updte for time until pickup
+            }
+            case "PURCHASE-ONLINE", "PURCHASE-IN-STORE" -> {
+                // may need to update for time until pickup
                 if(store.getAvailableBikes() >= 1)
                 {
-                    event.success = true;
+                    event.setSuccess(true);
                 }
-                break;
-            case "PICK-UP":
-                // if email address matches one previously supplied
-                // if 2 days of simulated time
-                break;
-            default:
-                event = null;
-                break;
-        }  
-        
+            }
+            case "PICK-UP" -> {
+                Bike pickedUp = store.attemptPickup(event);
+                if(pickedUp != null)
+                {
+                    event.setBikeInfo(pickedUp);
+                    event.setSuccess(true);
+                }
+
+            }
+            default -> {
+                event.setSuccess(false);
+                event.setFailure(1);
+            }
+        }
+
+
+        if(msgIsValid(message) == 1)
+        {
+            event.setSuccess(false);
+        }
+
         updateObservers(event);
     }
-    public static boolean msgIsValid(String message)
+    public static int msgIsValid(String message)
     {
-        boolean valid = false;
-        // preset valid to false so that if the message does not match any valid starts, false is passed
-
+        int invalid = 1;
+        // preset invalid to 1 which is the case of a message string that needs an email not having one
 
         List<String> validStarts = new ArrayList<>(Arrays.asList("DELIVERY", "PURCHASE-IN-STORE"));
         List<String> emailStarts = new ArrayList<>(Arrays.asList("DROP-OFF", "PURCHASE-ONLINE", "PICK-UP"));
@@ -87,24 +108,26 @@ public class MessageHandler {
 
         switch(messageParts.length)
         {
-            case 1: // if the message only has 1 string and it starts with one of the valid starts, return true
+            case 1 -> {
+                // if the message only has 1 string and it starts with one of the valid starts, return true
                 if(validStarts.contains(message))
                 {
-                    valid = true;
+                    invalid = 0;
                 }
-                break;
-            case 2: // if the message has 2 strings and starts with any of the starts that need emails, return true
+            }
+            case 2 -> {
+                // if the message has 2 strings and starts with any of the starts that need emails, return true
                 if(emailStarts.contains(messageParts[0]))
                 {
-                    valid = true;
+                    invalid = 0;
                 }
-                break;
-            default: // else if the message has more than 2 parts, return false
-                valid = false;
+            }
+            default -> // else if the message has more than 2 parts, return false
+                invalid = 1;
                 
         }
         
-        return valid;
+        return invalid;
     }
 
 
