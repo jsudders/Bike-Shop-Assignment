@@ -11,17 +11,13 @@ public class App
         try
         {
             Scenario scObject = new Scenario();
+            BikeStore store = new BikeStore();
             while(System.in.available() == 0)  // <-- actual Java code
             {
                 String message = scObject.nextMessage();
                 while(message != null)
                 {
-                    if(MessageHandler.msgIsValid(message))
-                    {
-
-
-
-                    }
+                    //MessageHandler.handleMessage(store, message);
                 }
             // Pseudocode
             // show status;
