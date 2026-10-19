@@ -6,8 +6,9 @@ import java.util.logging.Logger;
 import edu.curtin.oose.bikeApp.BikeStore;
 import edu.curtin.oose.bikeApp.MessageHandler;
 import edu.curtin.oose.bikeApp.model.Bike;
+import edu.curtin.oose.bikeApp.model.BikeState;
 import edu.curtin.oose.bikeApp.model.Message;
-
+import edu.curtin.oose.bikeApp.model.ServiceState;
 public class BankObserver implements MessageObserver {
     private BikeStore store;
     private final static Logger LOG = Logger.getLogger(BikeStore.class.getName());
@@ -18,7 +19,6 @@ public class BankObserver implements MessageObserver {
     }
     
     @Override
-    public void update(Message event)
     public void update(Message event)
     {
         int currentCash = store.getCash();

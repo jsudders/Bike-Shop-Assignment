@@ -25,5 +25,4 @@ public class OnHoldState implements BikeState{
     {
         
     }
-    
 }

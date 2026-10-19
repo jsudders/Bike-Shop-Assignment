@@ -25,4 +25,10 @@ public class ServiceState implements BikeState{
     {
         
     }
+
+    @Override
+    public void elapseDay(Bike bike)
+    {
+        
+    }
 }

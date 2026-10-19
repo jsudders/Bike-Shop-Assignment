@@ -1,11 +1,14 @@
 package edu.curtin.oose.bikeApp.model;
 
+import edu.curtin.oose.bikeApp.model.*;
+
 public class Bike {
     // state BikeState
     private String customerEmail;
     private BikeState bikeState = new AvailableState();
     private int holdTime = 0;
     private String bikeID;
+    private Boolean canPickup = true;
 
     public Bike(String inEmail, String inBikeID)
     {
@@ -53,16 +56,27 @@ public class Bike {
     {
         bikeState.putOnHold(this);
     }
-
-    public void serviceBike()
+    
+    public void elapseDay()
     {
-        bikeState.serviceBike(this);
+        if((bikeState instanceof OnHoldState) || (bikeState instanceof ServiceState))
+        {
+            holdTime += 1;
+
+            availableForPickup();
+        }
+        
     }
 
     public boolean availableForPickup()
     {
-        return (this.bikeState instanceof ServiceState) && (this.holdTime >= 2);
+        return canPickup = (this.bikeState instanceof ServiceState) && (this.holdTime >= 2);
         // if the bike is currently being serviced and the hold time is greater than 2
     }
-    
+
+
+    public boolean checkPickup()
+    {
+        return canPickup;
+    }
 }

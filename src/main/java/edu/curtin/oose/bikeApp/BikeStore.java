@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.*;
 
 import edu.curtin.oose.bikeApp.model.AvailableState;
 import edu.curtin.oose.bikeApp.model.Bike;
@@ -21,6 +22,8 @@ public class BikeStore {
     // using HashMap because it has better time complexity and bikes do not need to be in order
     // using List<Bike> because customers can have more than one bike
     private final static Logger LOG = Logger.getLogger(BikeStore.class.getName());
+    private int time = 0;
+
 
     public void updateCash(int inCash)
     {
@@ -48,6 +51,17 @@ public class BikeStore {
 
         return totalBikes;
     }
+
+    public void elapseDay()
+    {
+        time += 1;
+    }
+
+    public int getTime()
+    {
+        return time;
+    }
+
 
     public int getServicedBikesCount()
     {
