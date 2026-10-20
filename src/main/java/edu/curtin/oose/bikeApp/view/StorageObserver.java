@@ -2,9 +2,8 @@ package edu.curtin.oose.bikeApp.view;
 import edu.curtin.oose.bikeApp.BikeStore;
 import edu.curtin.oose.bikeApp.model.Bike;
 import edu.curtin.oose.bikeApp.model.Message;
-import edu.curtin.oose.bikeApp.model.OnHoldState;
 public class StorageObserver implements MessageObserver{
-    private BikeStore store;
+    private final BikeStore store;
 
     public StorageObserver(BikeStore inStore)
     {
@@ -16,6 +15,7 @@ public class StorageObserver implements MessageObserver{
     {
         
         String message = event.getMessage();
+        Bike bike = event.getBikeInfo();
 
         if(event.getSuccess())
         {
@@ -25,27 +25,21 @@ public class StorageObserver implements MessageObserver{
                     store.getDelivery();
                 }
                 case "DROP-OFF" -> {
-                    
+                    store.serviceBike(bike);
                 }
                 case "PURCHASE-ONLINE" -> {
-    
+                    store.holdBike(bike);
                 }
                 case "PURCHASE-IN-STORE" -> {
-    
+                    store.sellBike();
                 }
                 case "PICK-UP" -> {
-                    Bike pickedUp = event.getBikeInfo();
-                    if(pickedUp != null)
-                    {
-                        if(pickedUp.getState() instanceof OnHoldState)
-                        {
-                            store.removeBike(pickedUp);
-                            // TODO: returns boolean, maybe do something with that
-                        }
+                    // already checked whether there is a valid bike available for service in the subject and store
+                    store.removeBike(bike);
+                    // removes the bike from either the held or serviced list
                     }
                 }
             }
 
         }
-    }
 }

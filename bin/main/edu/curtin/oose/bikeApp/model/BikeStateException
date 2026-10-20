@@ -1,0 +1,7 @@
+public class BikeStateException extends Exception
+{
+    public BikeStateException(String msg)
+    {
+        super(msg);
+    }
+}

@@ -1,5 +1,8 @@
 package edu.curtin.oose.bikeApp;
 
+import edu.curtin.oose.bikeApp.view.BankObserver;
+import edu.curtin.oose.bikeApp.view.NotificationObserver;
+import edu.curtin.oose.bikeApp.view.StorageObserver;
 
 /**
  * Entry point into the application. To change the package, and/or the name of this class, make
@@ -13,12 +16,22 @@ public class App
         {
             Scenario scObject = new Scenario();
             BikeStore store = new BikeStore();
+            BankObserver bank = new BankObserver(store);
+            NotificationObserver notification = new NotificationObserver(store);
+            StorageObserver storage = new StorageObserver(store);
+
+            MessageHandler handler = new MessageHandler();
+            handler.addObserver(bank);
+            handler.addObserver(notification);
+            handler.addObserver(storage);
+
             while(System.in.available() == 0)  // <-- actual Java code
             {
                 String message = scObject.nextMessage();
                 while(message != null)
                 {
-                    //MessageHandler.handleMessage(store, message);
+                   handler.handleMessage(store, message);
+                   message = scObject.nextMessage();
                 }
             // Pseudocode
             // show status;
@@ -29,14 +42,7 @@ public class App
                 try
                 {
                     Thread.sleep(1000);  // milliseconds
-                }
-                catch(InterruptedException e)
-                {
-                    throw new AssertionError(e);
-                }
-                try
-                {
-                    Thread.sleep(1000);  // milliseconds
+                    store.elapseDay();
                 }
                 catch(InterruptedException e)
                 {
@@ -47,10 +53,11 @@ public class App
             // Perform one simulation “step” on each loop iteration;
             // Wait 1 second between steps.
             }
+            store.printFinalStats();
         }
         catch(Exception e)
         {
-
+            System.out.println("ERROR " + e.getMessage());
         }
        
 

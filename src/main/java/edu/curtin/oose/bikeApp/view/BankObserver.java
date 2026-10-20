@@ -4,16 +4,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import edu.curtin.oose.bikeApp.BikeStore;
-import edu.curtin.oose.bikeApp.MessageHandler;
 import edu.curtin.oose.bikeApp.model.Bike;
-import edu.curtin.oose.bikeApp.model.BikeState;
 import edu.curtin.oose.bikeApp.model.Message;
 import edu.curtin.oose.bikeApp.model.ServiceState;
 public class BankObserver implements MessageObserver {
-    private BikeStore store;
+    private final BikeStore store;
     private final static Logger LOG = Logger.getLogger(BikeStore.class.getName());
 
-    public BankObserver(BikeStore inStore, MessageHandler inSubject)
+    public BankObserver(BikeStore inStore)
     {
         store = inStore;
     }
@@ -42,7 +40,7 @@ public class BankObserver implements MessageObserver {
                     LOG.log(Level.FINE, "Bank updated: +1000");
                 }
                 case "PICK-UP" -> {
-                    if(bike.availableForPickup())
+                    if(bike.getState() instanceof ServiceState) // check that the bike that is supposed to be picked up is in fact available, the specific bike from the service list is already passed through the subject
                     {
                         newCash = currentCash + 100;
                         LOG.log(Level.FINE, "Bank updated: +100");

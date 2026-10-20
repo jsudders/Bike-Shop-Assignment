@@ -1,13 +1,11 @@
 package edu.curtin.oose.bikeApp.model;
 
-import edu.curtin.oose.bikeApp.model.*;
-
 public class Bike {
     // state BikeState
-    private String customerEmail;
+    private final String customerEmail;
     private BikeState bikeState = new AvailableState();
-    private int holdTime = 0;
-    private String bikeID;
+    private int serviceTime;
+    private final String bikeID;
     private Boolean canPickup = true;
 
     public Bike(String inEmail, String inBikeID)
@@ -15,16 +13,7 @@ public class Bike {
         this.customerEmail = inEmail;
         this.bikeID = inBikeID;
         this.bikeState = new AvailableState();
-
-        // switch(message)
-        // {
-        //     case "DROP-OFF":
-        //         this.bikeState = new ServiceState();
-        //         break;
-        //     case "PURCHASE-ONLINE":
-        //         this.bikeState = new OnHoldState();
-        //         break;
-        // }
+        this.serviceTime = 0;
     }
 
     public String getEmail()
@@ -37,6 +26,11 @@ public class Bike {
         return bikeState;
     }
 
+    public void setState(BikeState state)
+    {
+        bikeState = state;
+    }
+
     public String getBikeID()
     {
         return bikeID;
@@ -44,39 +38,37 @@ public class Bike {
 
     public int getTime()
     {
-        return holdTime;
-    }
-
-    public void pickUp()
-    {
-        bikeState.pickUp(this);
+        return serviceTime;
     }
 
     public void putOnHold()
     {
         bikeState.putOnHold(this);
     }
+
+    public void serviceBike()
+    {
+        bikeState.serviceBike(this);
+    }
     
     public void elapseDay()
     {
-        if((bikeState instanceof OnHoldState) || (bikeState instanceof ServiceState))
-        {
-            holdTime += 1;
-
-            availableForPickup();
-        }
-        
+        bikeState.elapseDay(this);
     }
-
-    public boolean availableForPickup()
+    
+    public void setTime(int newTime)
     {
-        return canPickup = (this.bikeState instanceof ServiceState) && (this.holdTime >= 2);
-        // if the bike is currently being serviced and the hold time is greater than 2
+        serviceTime = newTime;
     }
 
+    public void setPickup(boolean isAvailable)
+    {
+        canPickup = isAvailable;
+    }
 
     public boolean checkPickup()
     {
         return canPickup;
     }
+
 }

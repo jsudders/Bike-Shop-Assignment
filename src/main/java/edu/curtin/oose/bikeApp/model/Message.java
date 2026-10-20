@@ -4,12 +4,12 @@ import java.util.Map;
 import java.util.UUID;
 
 public class Message {
-    private String message;
+    private final String message;
     private String email;
     private Bike bikeInfo;
     private int failure;
     private boolean success;
-    private Map<Integer, String> failureMap = Map.of(
+    private final Map<Integer, String> failureMap = Map.of(
         0, "",
         1, "Invalid message",
         2, "Not enough space",
@@ -34,9 +34,9 @@ public class Message {
         }
     }
 
-    public String getFailure(int failureInt)
+    public String getFailure()
     {
-        return failureMap.get(failureInt);
+        return failureMap.get(failure);
     }
 
     public String getMessage()
@@ -54,10 +54,6 @@ public class Message {
         return bikeInfo;
     }
 
-    public int getFailure()
-    {
-        return failure;
-    }
 
     public boolean getSuccess()
     {

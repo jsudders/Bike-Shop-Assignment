@@ -1,31 +1,42 @@
 package edu.curtin.oose.bikeApp.view;
 
+import edu.curtin.oose.bikeApp.BikeStore;
 import edu.curtin.oose.bikeApp.model.Message;
 public class NotificationObserver implements MessageObserver{
+    private final BikeStore store;
+    private String output;
 
+    public NotificationObserver(BikeStore inStore)
+    {
+        store = inStore;
+    }
 
     @Override
     public void update(Message event)
     {
-        String message = event.getMessage();
+        this.output = "\n" + event.getMessage();
+        store.incrementMessages();
 
-        switch(message)
+        if(!(event.getEmail()).isEmpty())
         {
-            case "DELIVERY" -> {
-
-            }
-            case "DROP-OFF" -> {
-
-            }
-            case "PURCHASE-ONLINE" -> {
-
-            }
-            case "PURCHASE-IN-STORE" -> {
-
-            }
-            case "PICK-UP" -> {
-                
-            }
+            output += " WITH EMAIL: " + event.getEmail(); 
         }
+
+
+        if(event.getSuccess())
+        {
+            output += "\nSUCCESS";
+        }
+        else
+        {
+            output += "\nFAILURE: " + event.getFailure();
+            store.incrementFailures();
+        }
+
+        displayMessage();
+    }
+
+    public void displayMessage() {
+        System.out.println(output);
     }
 }

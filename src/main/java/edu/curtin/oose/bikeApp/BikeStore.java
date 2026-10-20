@@ -1,11 +1,11 @@
 package edu.curtin.oose.bikeApp;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.*;
 
 import edu.curtin.oose.bikeApp.model.AvailableState;
 import edu.curtin.oose.bikeApp.model.Bike;
@@ -16,13 +16,15 @@ import edu.curtin.oose.bikeApp.model.ServiceState;
 public class BikeStore {
     private int cash = 15000;
     private int availableBikes = 50;
-    public final static int BIKESPACE = 100;
-    private Map<String, List<Bike>> servicedBikes = new HashMap<>();
-    private Map<String, List<Bike>> heldBikes = new HashMap<>();
+    public final int BIKESPACE = 100;
+    private final Map<String, List<Bike>> servicedBikes = new HashMap<>();
+    private final Map<String, List<Bike>> heldBikes = new HashMap<>();
     // using HashMap because it has better time complexity and bikes do not need to be in order
     // using List<Bike> because customers can have more than one bike
     private final static Logger LOG = Logger.getLogger(BikeStore.class.getName());
     private int time = 0;
+    private int totalMessages = 0;
+    private int totalFailures = 0;
 
 
     public void updateCash(int inCash)
@@ -55,6 +57,20 @@ public class BikeStore {
     public void elapseDay()
     {
         time += 1;
+        for(List<Bike> serviceBikeList : servicedBikes.values())
+        {
+            for(Bike serviceBike : serviceBikeList )
+            {
+                serviceBike.elapseDay();
+            }
+        }
+
+        if(time % 7 == 0)
+        {
+            updateCash(cash - 1000); // pay employee every 7 days
+        }
+
+        printStats();
     }
 
     public int getTime()
@@ -102,21 +118,24 @@ public class BikeStore {
                     return;
                 }
             }
-            
-        }
-        //TODO: this above may not be necessary at all
+            bike.serviceBike();
+            servicedBikes.get(custEmail).add(bike); // adds bike to list
 
-        bike.serviceBike(); // bike is not in the servicedBikes list, but customer may already be in list
-        List<Bike> custsBikes = servicedBikes.get(custEmail);
-        custsBikes.add(bike);
-        servicedBikes.put(custEmail, custsBikes);
+        }
+        else
+        {
+            List<Bike> custBikes = new ArrayList<>();
+            bike.serviceBike();
+            custBikes.add(bike);
+            servicedBikes.put(custEmail, custBikes);
+        }
+        
         LOG.log(Level.INFO, "Bike with ID {0} added to Service List", bike.getBikeID());
     }
 
     public void holdBike(Bike bike)
     {
-        String custEmail = bike.getEmail();
-
+        String custEmail = bike.getEmail().trim();
         if(heldBikes.containsKey(custEmail))
         {
             List<Bike> preExistingBikes = heldBikes.get(custEmail);
@@ -129,7 +148,14 @@ public class BikeStore {
                     return;
                 }
             }
+            heldBikes.get(custEmail).add(bike);
             
+        }
+        else
+        {
+            List<Bike> custBikes = new ArrayList<>();
+            custBikes.add(bike);
+            heldBikes.put(custEmail, custBikes);
         }
 
         if(bike.getState() instanceof AvailableState)
@@ -137,9 +163,8 @@ public class BikeStore {
             availableBikes -= 1;
         }
 
-        List<Bike> custBikes = heldBikes.get(custEmail);
-        custBikes.add(bike);
-        heldBikes.put(custEmail, custBikes);
+        
+        bike.putOnHold();
 
         LOG.log(Level.INFO, "Bike with ID {0} added to Held List", bike.getBikeID());
 
@@ -147,8 +172,15 @@ public class BikeStore {
 
     public Bike attemptPickup(Message message)
     {
-        String email = message.getEmail();
-
+        String email = message.getEmail().trim();
+        if(heldBikes.isEmpty())
+        {
+            System.out.println("heldBikes is empty");
+        }
+        if(servicedBikes.isEmpty())
+        {
+            System.out.println("Services bikes is empty");
+        }
         if(!heldBikes.containsKey(email) && !servicedBikes.containsKey(email))
         {
             message.setFailure(4); // no bike matching customer email
@@ -167,7 +199,9 @@ public class BikeStore {
             // also check if bike has been serviced
             for(Bike bike : bikeList)
             {
-                if(bike.availableForPickup())
+                System.out.println(bike.getTime());
+                System.out.println(bike.checkPickup());
+                if(bike.checkPickup())
                 {
                     return bike;
                 }
@@ -183,7 +217,10 @@ public class BikeStore {
     public boolean removeBike(Bike bike)
     {
         String custEmail = bike.getEmail();
-
+        /* PICK-UP WITH EMAIL: lnrsi@htf.gax
+SUCCESS
+Oct 20, 2026 12:01:51 PM edu.curtin.oose.bikeApp.BikeStore removeBike
+INFO: Successfully removed bike of customer [lnrsi@htf.gax] from Held Bikes list */
         if(bike.getState() instanceof OnHoldState)
         {
             List<Bike> custHelds = heldBikes.get(custEmail);
@@ -214,5 +251,42 @@ public class BikeStore {
         LOG.log(Level.SEVERE, "Could not remove bike under customer [{0}] from Held List or Serviced List", custEmail);
         return false;
     }
+
+// TODO: remove from list after pickup on service
+// method overload
+    public boolean sellBike()
+    {
+        if(availableBikes != 0)
+        {
+            availableBikes -= 1;
+            return true;
+        }
+        return false;
+    }
     
+    public void incrementMessages()
+    {
+        totalMessages += 1;
+    }
+
+    public void incrementFailures()
+    {
+        totalFailures += 1;
+    }
+
+
+    public void printStats()
+    {
+        System.out.println("\nDays elapsed: " + time);
+        System.out.println("Total cash: " + cash);
+        System.out.println("Bikes available for purchase " + availableBikes);
+        System.out.println("Bikes being serviced: " + servicedBikes.size());
+        System.out.println("Bikes awaiting pickup: " + heldBikes.size() + "\n");
+    }
+
+    public void printFinalStats()
+    {
+        System.out.println("Total messages: " + totalMessages);
+        System.out.println("Total failures: " + totalFailures);
+    }
 }
