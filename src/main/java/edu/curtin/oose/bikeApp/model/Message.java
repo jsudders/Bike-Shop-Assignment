@@ -15,7 +15,9 @@ public class Message {
         2, "Not enough space",
         3, "No bikes left",
         4, "No bike matching customer email",
-        5, "Bike not ready"
+        5, "Bike not ready",
+        6, "Not enough cash"
+
     );
 
     public Message(String inMessage, String inEmail, boolean inSuccess)
@@ -77,6 +79,10 @@ public class Message {
 
     public void setFailure(int inFailure)
     {
+        if(inFailure >= 1)
+        {
+            setSuccess(false);
+        }
         this.failure = inFailure;
     }
 }

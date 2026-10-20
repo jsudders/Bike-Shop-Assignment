@@ -1,9 +1,7 @@
 package edu.curtin.oose.bikeApp;
 
-import edu.curtin.oose.bikeApp.view.BankObserver;
-import edu.curtin.oose.bikeApp.view.NotificationObserver;
-import edu.curtin.oose.bikeApp.view.StorageObserver;
-
+import edu.curtin.oose.bikeApp.view.*;
+import java.io.*;
 /**
  * Entry point into the application. To change the package, and/or the name of this class, make
  * sure to update the 'mainClass = ...' line in build.gradle.kts.
@@ -12,17 +10,18 @@ public class App
 {
     public static void main(String[] args)
     {
-        try
+        try(FileWriter fw = new FileWriter("sims_results.txt"))
         {
             Scenario scObject = new Scenario();
-            BikeStore store = new BikeStore();
+            BikeStore store = new BikeStore(fw);
+            FileObserver fileOb = store.getOb();
             BankObserver bank = new BankObserver(store);
-            NotificationObserver notification = new NotificationObserver(store);
+            NotificationObserver output = new NotificationObserver(store, fileOb);
             StorageObserver storage = new StorageObserver(store);
 
             MessageHandler handler = new MessageHandler();
             handler.addObserver(bank);
-            handler.addObserver(notification);
+            handler.addObserver(output);
             handler.addObserver(storage);
 
             while(System.in.available() == 0)  // <-- actual Java code
@@ -30,8 +29,8 @@ public class App
                 String message = scObject.nextMessage();
                 while(message != null)
                 {
-                   handler.handleMessage(store, message);
-                   message = scObject.nextMessage();
+                    handler.handleMessage(store, message);
+                    message = scObject.nextMessage();
                 }
             // Pseudocode
             // show status;
@@ -57,9 +56,8 @@ public class App
         }
         catch(Exception e)
         {
-            System.out.println("ERROR " + e.getMessage());
+            System.out.println("ERROR " + e + e.getMessage());
         }
-       
 
         /*The method “System.in.available()” returns the number of bytes in the console input buffer. This is 0 until there’s any console input, and the user must press Enter to send any console input to the program. Thus, this event loop runs until the user presses Enter.
 

@@ -1,0 +1,104 @@
+Oct 20, 2026 12:50:54 PM edu.curtin.oose.bikeApp.BikeStore serviceBike
+INFO: Bike with ID cf8f3b29-69e9-4790-825a-fd84e8597560 added to Service List
+Oct 20, 2026 12:50:55 PM edu.curtin.oose.bikeApp.BikeStore holdBike
+INFO: Bike with ID 83ece689-ebc7-428a-a649-ce3aed69962f added to Held List
+Oct 20, 2026 12:50:56 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: gfgsell@rmldyo.efz ready for pickup from being serviced
+Oct 20, 2026 12:50:56 PM edu.curtin.oose.bikeApp.BikeStore holdBike
+INFO: Bike with ID 0658f3a5-f5e3-46a9-8259-ffc7439583f3 added to Held List
+Oct 20, 2026 12:50:57 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: gfgsell@rmldyo.efz ready for pickup from being serviced
+Oct 20, 2026 12:50:57 PM edu.curtin.oose.bikeApp.BikeStore serviceBike
+INFO: Bike with ID d68262ca-0959-417b-ae20-bd9af257a2fd added to Service List
+Oct 20, 2026 12:50:58 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: gfgsell@rmldyo.efz ready for pickup from being serviced
+Oct 20, 2026 12:50:59 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: gfgsell@rmldyo.efz ready for pickup from being serviced
+Oct 20, 2026 12:50:59 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: fmkwi@zlefza.jjj ready for pickup from being serviced
+Oct 20, 2026 12:50:59 PM edu.curtin.oose.bikeApp.BikeStore serviceBike
+INFO: Bike with ID a2c81599-35b8-4868-bf23-c40fbf569343 added to Service List
+Oct 20, 2026 12:50:59 PM edu.curtin.oose.bikeApp.BikeStore holdBike
+INFO: Bike with ID 4a1ec355-b627-45ea-bfe6-03fd619462e9 added to Held List
+Oct 20, 2026 12:50:59 PM edu.curtin.oose.bikeApp.BikeStore holdBike
+INFO: Bike with ID c0f08e8c-7011-4aeb-8ba4-dfd97cc2d3aa added to Held List
+Oct 20, 2026 12:51:00 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: gfgsell@rmldyo.efz ready for pickup from being serviced
+Oct 20, 2026 12:51:00 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: fmkwi@zlefza.jjj ready for pickup from being serviced
+Oct 20, 2026 12:51:01 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: hymw@zyka.sah ready for pickup from being serviced
+Oct 20, 2026 12:51:01 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: gfgsell@rmldyo.efz ready for pickup from being serviced
+Oct 20, 2026 12:51:01 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: fmkwi@zlefza.jjj ready for pickup from being serviced
+Oct 20, 2026 12:51:01 PM edu.curtin.oose.bikeApp.BikeStore holdBike
+INFO: Bike with ID aac93c68-555d-4fb7-9a99-e7cdece002a0 added to Held List
+Oct 20, 2026 12:51:02 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: hymw@zyka.sah ready for pickup from being serviced
+Oct 20, 2026 12:51:02 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: gfgsell@rmldyo.efz ready for pickup from being serviced
+Oct 20, 2026 12:51:02 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: fmkwi@zlefza.jjj ready for pickup from being serviced
+Oct 20, 2026 12:51:02 PM edu.curtin.oose.bikeApp.BikeStore serviceBike
+INFO: Bike with ID aa4cbc1c-b5be-4324-b033-6f86539d3841 added to Service List
+Oct 20, 2026 12:51:02 PM edu.curtin.oose.bikeApp.BikeStore attemptPickup
+INFO: Attempt pickup email psltdux@imoj.arr
+Oct 20, 2026 12:51:02 PM edu.curtin.oose.bikeApp.BikeStore attemptPickup
+INFO: Held Bike found from customer psltdux@imoj.arr
+Oct 20, 2026 12:51:02 PM edu.curtin.oose.bikeApp.BikeStore removeBike
+INFO: Attempting to remove bike with email psltdux@imoj.arr
+Oct 20, 2026 12:51:02 PM edu.curtin.oose.bikeApp.BikeStore removeBike
+INFO: Successfully removed bike of customer [psltdux@imoj.arr] from Held Bikes list
+Oct 20, 2026 12:51:03 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: hymw@zyka.sah ready for pickup from being serviced
+Oct 20, 2026 12:51:03 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: gfgsell@rmldyo.efz ready for pickup from being serviced
+Oct 20, 2026 12:51:03 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: fmkwi@zlefza.jjj ready for pickup from being serviced
+Oct 20, 2026 12:51:05 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: hymw@zyka.sah ready for pickup from being serviced
+Oct 20, 2026 12:51:05 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: gfgsell@rmldyo.efz ready for pickup from being serviced
+Oct 20, 2026 12:51:05 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: itp@usmvfk.jyj ready for pickup from being serviced
+Oct 20, 2026 12:51:05 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: fmkwi@zlefza.jjj ready for pickup from being serviced
+Oct 20, 2026 12:51:05 PM edu.curtin.oose.bikeApp.BikeStore holdBike
+INFO: Bike with ID d812af35-37d3-431f-863e-be67a240ac1f added to Held List
+Oct 20, 2026 12:51:06 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: hymw@zyka.sah ready for pickup from being serviced
+Oct 20, 2026 12:51:06 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: gfgsell@rmldyo.efz ready for pickup from being serviced
+Oct 20, 2026 12:51:06 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: itp@usmvfk.jyj ready for pickup from being serviced
+Oct 20, 2026 12:51:06 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: fmkwi@zlefza.jjj ready for pickup from being serviced
+Oct 20, 2026 12:51:07 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: hymw@zyka.sah ready for pickup from being serviced
+Oct 20, 2026 12:51:07 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: gfgsell@rmldyo.efz ready for pickup from being serviced
+Oct 20, 2026 12:51:07 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: itp@usmvfk.jyj ready for pickup from being serviced
+Oct 20, 2026 12:51:07 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: fmkwi@zlefza.jjj ready for pickup from being serviced
+Oct 20, 2026 12:51:08 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: hymw@zyka.sah ready for pickup from being serviced
+Oct 20, 2026 12:51:08 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: gfgsell@rmldyo.efz ready for pickup from being serviced
+Oct 20, 2026 12:51:08 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: itp@usmvfk.jyj ready for pickup from being serviced
+Oct 20, 2026 12:51:08 PM edu.curtin.oose.bikeApp.model.ServiceState elapseDay
+INFO: Bike from email: fmkwi@zlefza.jjj ready for pickup from being serviced
+Oct 20, 2026 12:51:08 PM edu.curtin.oose.bikeApp.BikeStore attemptPickup
+INFO: Attempt pickup email fmkwi@zlefza.jjj
+Oct 20, 2026 12:51:08 PM edu.curtin.oose.bikeApp.BikeStore attemptPickup
+INFO: Service Bike found from customer fmkwi@zlefza.jjj
+Oct 20, 2026 12:51:08 PM edu.curtin.oose.bikeApp.BikeStore removeBike
+INFO: Attempting to remove bike with email fmkwi@zlefza.jjj
+Oct 20, 2026 12:51:08 PM edu.curtin.oose.bikeApp.BikeStore removeBike
+INFO: Successfully removed bike of customer [fmkwi@zlefza.jjj] from Service List
+Oct 20, 2026 12:51:08 PM edu.curtin.oose.bikeApp.BikeStore attemptPickup
+INFO: Attempt pickup email psltdux@imoj.arr
+Oct 20, 2026 12:51:08 PM edu.curtin.oose.bikeApp.BikeStore attemptPickup
+INFO: Held Bike found from customer psltdux@imoj.arr

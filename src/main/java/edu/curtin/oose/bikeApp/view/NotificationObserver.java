@@ -2,13 +2,27 @@ package edu.curtin.oose.bikeApp.view;
 
 import edu.curtin.oose.bikeApp.BikeStore;
 import edu.curtin.oose.bikeApp.model.Message;
+
+import java.util.*;
+import java.io.*;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+
 public class NotificationObserver implements MessageObserver{
     private final BikeStore store;
     private String output;
+    private final FileObserver fileOb;
+    private static final Logger LOG = Logger.getLogger(NotificationObserver.class.getName());
 
-    public NotificationObserver(BikeStore inStore)
+    public NotificationObserver(BikeStore inStore, FileObserver inOb)
     {
         store = inStore;
+        fileOb = inOb;
+    }
+
+    public void updateObservers()
+    {
+        fileOb.update(output);
     }
 
     @Override
@@ -34,6 +48,7 @@ public class NotificationObserver implements MessageObserver{
         }
 
         displayMessage();
+        updateObservers();
     }
 
     public void displayMessage() {

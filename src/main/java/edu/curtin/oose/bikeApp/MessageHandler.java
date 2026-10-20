@@ -2,6 +2,8 @@ package edu.curtin.oose.bikeApp;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 import edu.curtin.oose.bikeApp.model.Bike;
 import edu.curtin.oose.bikeApp.model.Message;
@@ -9,6 +11,7 @@ import edu.curtin.oose.bikeApp.view.MessageObserver;
 
 public class MessageHandler {
     private final List<MessageObserver> observers;
+    private final static Logger LOG = Logger.getLogger(BikeStore.class.getName());
 
     public MessageHandler()
     {
@@ -37,6 +40,7 @@ public class MessageHandler {
 
     public void handleMessage(BikeStore store, String message)
     {
+        LOG.log(Level.FINEST, "Message being handled: {0}", message);
         String[] messageParts = message.strip().split(" ");
         String email = "";
         if(messageParts.length == 2)
@@ -55,11 +59,23 @@ public class MessageHandler {
         switch(messageParts[0])
         {
             case "DELIVERY" -> {
-                if((store.getTotalBikes() <= 90) && (store.getCash() >= 10000))
+                if((store.getTotalBikes() <= store.BIKESPACE - 10))
                 {
-                    event.setSuccess(true);
-                    event.setEmail(""); // no email needed
+                    if(store.getCash() >= 10000)
+                    {
+                        event.setSuccess(true);
+                        event.setEmail(""); // no email needed
+                    }
+                    else
+                    {
+                        event.setFailure(6); // not enough cash
+                    }
                 }
+                else
+                {
+                    event.setFailure(2); // not enough space
+                }
+
             }
             case "DROP-OFF" -> {
                 if((store.getTotalBikes() <= store.BIKESPACE - 1))
@@ -68,12 +84,20 @@ public class MessageHandler {
                     // if the bike store has room for the bike, set the event as a success
                     // storageObserver manages putting the bike on hold
                 }
+                else
+                {
+                    event.setFailure(2); // not enough space
+                }
             }
             case "PURCHASE-ONLINE", "PURCHASE-IN-STORE" -> {
                     if(store.getAvailableBikes() >= 1)
                     {
                         event.setSuccess(true);
                         // if the bike store has an available bike, set the event success to true,
+                    }
+                    else
+                    {
+                        event.setFailure(3); // no bikes left
                     }
                 }
             case "PICK-UP" -> {
@@ -86,8 +110,7 @@ public class MessageHandler {
 
             }
             default -> {
-                event.setSuccess(false);
-                event.setFailure(1);
+                event.setFailure(1); // invalid message
             }
         }
 

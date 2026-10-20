@@ -12,6 +12,8 @@ import edu.curtin.oose.bikeApp.model.Bike;
 import edu.curtin.oose.bikeApp.model.Message;
 import edu.curtin.oose.bikeApp.model.OnHoldState;
 import edu.curtin.oose.bikeApp.model.ServiceState;
+import edu.curtin.oose.bikeApp.view.*;
+import java.io.*;
 
 public class BikeStore {
     private int cash = 15000;
@@ -25,7 +27,22 @@ public class BikeStore {
     private int time = 0;
     private int totalMessages = 0;
     private int totalFailures = 0;
+    private final FileObserver fileOb;
 
+    public BikeStore(FileWriter inFW)
+    {
+        fileOb = new FileObserver(inFW);
+    }
+
+    public FileObserver getOb()
+    {
+        return fileOb;
+    }
+
+    public void updateOb(String output)
+    {
+        fileOb.update(output);
+    }
 
     public void updateCash(int inCash)
     {
@@ -104,7 +121,7 @@ public class BikeStore {
     public void serviceBike(Bike bike)
     {
         String custEmail = bike.getEmail();
-        
+        LOG.log(Level.FINE, "Attemping to service bike with email {0}", custEmail);
         
         if(servicedBikes.containsKey(custEmail))
         {
@@ -118,6 +135,7 @@ public class BikeStore {
                     return;
                 }
             }
+            LOG.log(Level.INFO, "Bikes are being serviced from customer but not this bike");
             bike.serviceBike();
             servicedBikes.get(custEmail).add(bike); // adds bike to list
 
@@ -172,15 +190,8 @@ public class BikeStore {
 
     public Bike attemptPickup(Message message)
     {
-        String email = message.getEmail().trim();
-        if(heldBikes.isEmpty())
-        {
-            System.out.println("heldBikes is empty");
-        }
-        if(servicedBikes.isEmpty())
-        {
-            System.out.println("Services bikes is empty");
-        }
+        String email = message.getEmail();
+        LOG.log(Level.INFO, "Attempt pickup email {0}", email);
         if(!heldBikes.containsKey(email) && !servicedBikes.containsKey(email))
         {
             message.setFailure(4); // no bike matching customer email
@@ -190,7 +201,10 @@ public class BikeStore {
         }
         if(heldBikes.containsKey(email))
         {
+            LOG.log(Level.INFO, "Held Bike found from customer {0}", email);
+            
             return heldBikes.get(email).getFirst();
+
         }
 
         if(servicedBikes.containsKey(email))
@@ -199,10 +213,9 @@ public class BikeStore {
             // also check if bike has been serviced
             for(Bike bike : bikeList)
             {
-                System.out.println(bike.getTime());
-                System.out.println(bike.checkPickup());
                 if(bike.checkPickup())
                 {
+                    LOG.log(Level.INFO, "Service Bike found from customer [{0}]", email);
                     return bike;
                 }
             }
@@ -217,10 +230,7 @@ public class BikeStore {
     public boolean removeBike(Bike bike)
     {
         String custEmail = bike.getEmail();
-        /* PICK-UP WITH EMAIL: lnrsi@htf.gax
-SUCCESS
-Oct 20, 2026 12:01:51 PM edu.curtin.oose.bikeApp.BikeStore removeBike
-INFO: Successfully removed bike of customer [lnrsi@htf.gax] from Held Bikes list */
+        LOG.log(Level.FINE, "Attempting to remove bike with email [{0}]", custEmail);
         if(bike.getState() instanceof OnHoldState)
         {
             List<Bike> custHelds = heldBikes.get(custEmail);
@@ -230,6 +240,11 @@ INFO: Successfully removed bike of customer [lnrsi@htf.gax] from Held Bikes list
                 {
                     custHelds.remove(heldBike);
                     LOG.log(Level.INFO, "Successfully removed bike of customer [{0}] from Held Bikes list", custEmail);
+                    if(custHelds.isEmpty())
+                    {
+                        heldBikes.remove(custEmail);
+                        LOG.log(Level.INFO, "No more bikes on hold left for customer with email [{0}]. Removed from heldBikes");
+                    }
                     return true;
                 }
             }
@@ -243,6 +258,11 @@ INFO: Successfully removed bike of customer [lnrsi@htf.gax] from Held Bikes list
                 {
                     custServiced.remove(servicedBike);
                     LOG.log(Level.INFO, "Successfully removed bike of customer [{0}] from Service List", custEmail);
+                    if(custServiced.isEmpty())
+                    {
+                        servicedBikes.remove(custEmail);
+                        LOG.log(Level.INFO, "No more bikes being serviced for customer with email [{0}]. Removed from servicedBikes", custEmail);
+                    }
                     return true;
                 }
             }
@@ -276,17 +296,29 @@ INFO: Successfully removed bike of customer [lnrsi@htf.gax] from Held Bikes list
 
 
     public void printStats()
-    {
-        System.out.println("\nDays elapsed: " + time);
-        System.out.println("Total cash: " + cash);
-        System.out.println("Bikes available for purchase " + availableBikes);
-        System.out.println("Bikes being serviced: " + servicedBikes.size());
-        System.out.println("Bikes awaiting pickup: " + heldBikes.size() + "\n");
+    {   
+        String outputTemplate = """
+        %n
+        Days elapsed: %d
+        Total cash: %d
+        Bikes available for purchase: %d
+        Bikes being serviced: %d
+        Bikes awaiting pickup: %d%n""";
+        String statsOutput = String.format(outputTemplate, time, cash, availableBikes, servicedBikes.size(), heldBikes.size());
+        System.out.print(statsOutput);
+        updateOb(statsOutput);
+
     }
 
     public void printFinalStats()
     {
-        System.out.println("Total messages: " + totalMessages);
-        System.out.println("Total failures: " + totalFailures);
+        String outputTemplate = """
+        %n
+        Total messages: %d
+        Total failures: %d
+        """;
+        String finalStatsOutput = String.format(outputTemplate, totalMessages, totalFailures);
+        System.out.print(finalStatsOutput);
+        updateOb(finalStatsOutput);
     }
 }
