@@ -6,244 +6,50 @@ Bikes available for purchase: 50
 Bikes being serviced: 0
 Bikes awaiting pickup: 0
 
-DELIVERY
+DROP-OFF WITH EMAIL: xbwnji@ojkrd.gvf
 SUCCESS
-PURCHASE-ONLINE WITH EMAIL: gwvkn@fczrp.ckm
+PURCHASE-ONLINE WITH EMAIL: gzwp@iaxylf.fmu
+SUCCESS
+DROP-OFF WITH EMAIL: miz@tcyua.weq
 SUCCESS
 
 Days elapsed: 2
-Total cash: 11000
-Bikes available for purchase: 59
-Bikes being serviced: 0
+Total cash: 16000
+Bikes available for purchase: 49
+Bikes being serviced: 2
 Bikes awaiting pickup: 1
 
-PICK-UP WITH EMAIL: pbs@klgp.chh
-FAILURE: No bike matching customer email
-PURCHASE-IN-STORE
+DELIVERY
 SUCCESS
-PICK-UP WITH EMAIL: pbs@klgp.chh
-FAILURE: No bike matching customer email
-PICK-UP WITH EMAIL: gwvkn@fczrp.ckm
-SUCCESS
-PURCHASE-ONLINE WITH EMAIL: pbs@klgp.chh
+DROP-OFF WITH EMAIL: dqxz@wggmiai.jkw
 SUCCESS
 
 Days elapsed: 3
-Total cash: 13000
-Bikes available for purchase: 57
-Bikes being serviced: 0
+Total cash: 11000
+Bikes available for purchase: 59
+Bikes being serviced: 3
 Bikes awaiting pickup: 1
 
-PURCHASE-IN-STORE
-SUCCESS
-PURCHASE-IN-STORE
+PURCHASE-ONLINE WITH EMAIL: agcnddo@zrxmvh.fqd
 SUCCESS
 
 Days elapsed: 4
-Total cash: 15000
-Bikes available for purchase: 55
-Bikes being serviced: 0
-Bikes awaiting pickup: 1
+Total cash: 12000
+Bikes available for purchase: 58
+Bikes being serviced: 3
+Bikes awaiting pickup: 2
 
+PICK-UP WITH EMAIL: agcnddo@zrxmvh.fqd
+SUCCESS
+PICK-UP WITH EMAIL: miz@tcyua.weq
+SUCCESS
 
 Days elapsed: 5
-Total cash: 15000
-Bikes available for purchase: 55
-Bikes being serviced: 0
-Bikes awaiting pickup: 1
-
-PURCHASE-IN-STORE
-SUCCESS
-
-Days elapsed: 6
-Total cash: 16000
-Bikes available for purchase: 54
-Bikes being serviced: 0
-Bikes awaiting pickup: 1
-
-
-Days elapsed: 7
-Total cash: 15000
-Bikes available for purchase: 54
-Bikes being serviced: 0
-Bikes awaiting pickup: 1
-
-PURCHASE-ONLINE WITH EMAIL: rrqriq@yzfxzbn.ltb
-SUCCESS
-DELIVERY
-SUCCESS
-PURCHASE-IN-STORE
-SUCCESS
-DELIVERY
-SUCCESS
-PURCHASE-ONLINE WITH EMAIL: xyiece@jtqv.tmi
-SUCCESS
-
-Days elapsed: 8
-Total cash: 8000
-Bikes available for purchase: 71
-Bikes being serviced: 0
-Bikes awaiting pickup: 3
-
-PURCHASE-ONLINE WITH EMAIL: nzrsz@aiiov.psi
-SUCCESS
-
-Days elapsed: 9
-Total cash: 9000
-Bikes available for purchase: 70
-Bikes being serviced: 0
-Bikes awaiting pickup: 4
-
-DROP-OFF WITH EMAIL: gpda@mauurs.bmj
-SUCCESS
-
-Days elapsed: 10
-Total cash: 9000
-Bikes available for purchase: 70
-Bikes being serviced: 1
-Bikes awaiting pickup: 4
-
-PURCHASE-IN-STORE
-SUCCESS
-PURCHASE-IN-STORE
-SUCCESS
-PICK-UP WITH EMAIL: nzrsz@aiiov.psi
-SUCCESS
-DELIVERY
-SUCCESS
-DROP-OFF WITH EMAIL: nbx@rywae.koa
-SUCCESS
-
-Days elapsed: 11
-Total cash: 6000
-Bikes available for purchase: 78
+Total cash: 12100
+Bikes available for purchase: 58
 Bikes being serviced: 2
-Bikes awaiting pickup: 3
-
-PURCHASE-ONLINE WITH EMAIL: hvhntk@zszqndc.hje
-SUCCESS
-PICK-UP WITH EMAIL: gpda@mauurs.bmj
-SUCCESS
-
-Days elapsed: 12
-Total cash: 7100
-Bikes available for purchase: 77
-Bikes being serviced: 1
-Bikes awaiting pickup: 4
-
-PICK-UP WITH EMAIL: xyiece@jtqv.tmi
-SUCCESS
-
-Days elapsed: 13
-Total cash: 7100
-Bikes available for purchase: 77
-Bikes being serviced: 1
-Bikes awaiting pickup: 3
-
-DROP-OFF WITH EMAIL: gpp@xuelr.kpt
-SUCCESS
-DROP-OFF WITH EMAIL: lclq@aqnj.vqu
-SUCCESS
-DROP-OFF WITH EMAIL: kzxo@zsy.kwy
-SUCCESS
-
-Days elapsed: 14
-Total cash: 6100
-Bikes available for purchase: 77
-Bikes being serviced: 4
-Bikes awaiting pickup: 3
-
-PICK-UP WITH EMAIL: lclq@aqnj.vqu
-FAILURE: Bike not ready
-
-Days elapsed: 15
-Total cash: 6100
-Bikes available for purchase: 77
-Bikes being serviced: 4
-Bikes awaiting pickup: 3
-
-DROP-OFF WITH EMAIL: rpjv@dsuvs.avz
-SUCCESS
-
-Days elapsed: 16
-Total cash: 6100
-Bikes available for purchase: 77
-Bikes being serviced: 5
-Bikes awaiting pickup: 3
-
-PURCHASE-ONLINE WITH EMAIL: xhxwomg@qstijds.oen
-SUCCESS
-
-Days elapsed: 17
-Total cash: 7100
-Bikes available for purchase: 76
-Bikes being serviced: 5
-Bikes awaiting pickup: 4
-
-A<a WITH EMAIL: nzrsz@aiiov.psi
-FAILURE: Invalid message
-
-Days elapsed: 18
-Total cash: 7100
-Bikes available for purchase: 76
-Bikes being serviced: 5
-Bikes awaiting pickup: 4
-
-PURCHASE-IN-STORE
-SUCCESS
-
-Days elapsed: 19
-Total cash: 8100
-Bikes available for purchase: 75
-Bikes being serviced: 5
-Bikes awaiting pickup: 4
-
-PURCHASE-ONLINE WITH EMAIL: zryrm@jxw.utb
-SUCCESS
-
-Days elapsed: 20
-Total cash: 9100
-Bikes available for purchase: 74
-Bikes being serviced: 5
-Bikes awaiting pickup: 5
-
-PURCHASE-IN-STORE
-SUCCESS
-
-Days elapsed: 21
-Total cash: 9100
-Bikes available for purchase: 73
-Bikes being serviced: 5
-Bikes awaiting pickup: 5
-
-PURCHASE-ONLINE WITH EMAIL: hmroos@mafkg.pui
-SUCCESS
-PURCHASE-ONLINE WITH EMAIL: onrl@cweow.teb
-SUCCESS
-
-Days elapsed: 22
-Total cash: 11100
-Bikes available for purchase: 71
-Bikes being serviced: 5
-Bikes awaiting pickup: 7
-
-PURCHASE-ONLINE WITH EMAIL: oko@qiho.vub
-SUCCESS
-PURCHASE-ONLINE WITH EMAIL: wkfh@wxe.jmv
-SUCCESS
-PURCHASE-ONLINE WITH EMAIL: jivt@lef.rii
-SUCCESS
-PURCHASE-ONLINE WITH EMAIL: baqonx@gfi.xed
-SUCCESS
-PURCHASE-ONLINE WITH EMAIL: gbauvtj@cumsmx.hov
-SUCCESS
-
-Days elapsed: 23
-Total cash: 16100
-Bikes available for purchase: 66
-Bikes being serviced: 5
-Bikes awaiting pickup: 12
+Bikes awaiting pickup: 1
 
 
-Total messages: 42
-Total failures: 4
+Total messages: 8
+Total failures: 0

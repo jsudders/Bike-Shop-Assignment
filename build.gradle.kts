@@ -53,5 +53,8 @@ dependencies {
     implementation("io.qtjambi:qtjambi:6.11.1")
     implementation("org.apache.tika:tika:3.3.2")
     runtimeOnly("org.postgresql:postgresql:42.7.13")
+    implementation("com.google.inject:guice:7.0.0")
+    // Source: https://mvnrepository.com/artifact/com.google.inject/guice
+    //implementation("com.google.inject:guice:6.0.0")
 }
 

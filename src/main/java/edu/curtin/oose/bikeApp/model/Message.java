@@ -20,7 +20,7 @@ public class Message {
 
     );
 
-    public Message(String inMessage, String inEmail, boolean inSuccess)
+    public Message(String inMessage, String inEmail, boolean inSuccess, BikeFactory bFactory)
     {
         this.message = inMessage;
         this.email = inEmail;
@@ -29,8 +29,7 @@ public class Message {
 
         if(!(message.equals("DELIVERY")))
         {
-            UUID bikeUUID = UUID.randomUUID();
-            Bike newBike = new Bike(email, bikeUUID.toString());
+            Bike newBike = bFactory.createBike(email, (UUID.randomUUID()).toString());
     
             this.bikeInfo = newBike;
         }

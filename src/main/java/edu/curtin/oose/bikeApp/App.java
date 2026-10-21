@@ -1,7 +1,11 @@
 package edu.curtin.oose.bikeApp;
 
-import edu.curtin.oose.bikeApp.view.*;
-import java.io.*;
+import java.io.FileWriter;
+
+import edu.curtin.oose.bikeApp.model.BikeFactory;
+import edu.curtin.oose.bikeApp.model.MessageFactory;
+import edu.curtin.oose.bikeApp.view.FileObserver;
+import edu.curtin.oose.bikeApp.view.ObserverFactory;
 /**
  * Entry point into the application. To change the package, and/or the name of this class, make
  * sure to update the 'mainClass = ...' line in build.gradle.kts.
@@ -13,16 +17,20 @@ public class App
         try(FileWriter fw = new FileWriter("sims_results.txt"))
         {
             Scenario scObject = new Scenario();
-            BikeStore store = new BikeStore(fw);
-            FileObserver fileOb = store.getOb();
-            BankObserver bank = new BankObserver(store);
-            NotificationObserver output = new NotificationObserver(store, fileOb);
-            StorageObserver storage = new StorageObserver(store);
+            FileObserver fileOb = new FileObserver(fw);
+            BikeStore store = new BikeStore(fileOb);
+            
+            ObserverFactory obFactory = new ObserverFactory(store, fileOb);
+            BikeFactory bFactory = new BikeFactory();
+            MessageFactory mFactory = new MessageFactory(bFactory);
 
-            MessageHandler handler = new MessageHandler();
-            handler.addObserver(bank);
-            handler.addObserver(output);
-            handler.addObserver(storage);
+            MessageHandler handler = new MessageHandler( mFactory);
+
+            handler.addObserver(obFactory.createBank());
+            handler.addObserver(obFactory.createStorage());
+            handler.addObserver(obFactory.createNotification());
+
+            
 
             while(System.in.available() == 0)  // <-- actual Java code
             {

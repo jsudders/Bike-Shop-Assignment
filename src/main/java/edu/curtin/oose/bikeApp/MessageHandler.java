@@ -2,20 +2,23 @@ package edu.curtin.oose.bikeApp;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import edu.curtin.oose.bikeApp.model.Bike;
 import edu.curtin.oose.bikeApp.model.Message;
+import edu.curtin.oose.bikeApp.model.MessageFactory;
 import edu.curtin.oose.bikeApp.view.MessageObserver;
 
 public class MessageHandler {
     private final List<MessageObserver> observers;
     private final static Logger LOG = Logger.getLogger(BikeStore.class.getName());
+    private final MessageFactory mFactory;
 
-    public MessageHandler()
+    public MessageHandler(MessageFactory inMessageFactory)
     {
         observers = new ArrayList<>();
+        mFactory = inMessageFactory;
     }
     
     public void addObserver(MessageObserver ob)
@@ -49,7 +52,7 @@ public class MessageHandler {
         }
 
         
-        Message event = new Message(messageParts[0], email, false);
+        Message event = mFactory.createMessage(messageParts[0], email, false);
         
         // storage observer manages the bike states and store availability, setting bikes to OnHold, Service, Sold, etc.
         // bank observer manages the store's cash

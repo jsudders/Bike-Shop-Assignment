@@ -7,13 +7,14 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.google.inject.Inject;
+
 import edu.curtin.oose.bikeApp.model.AvailableState;
 import edu.curtin.oose.bikeApp.model.Bike;
 import edu.curtin.oose.bikeApp.model.Message;
 import edu.curtin.oose.bikeApp.model.OnHoldState;
 import edu.curtin.oose.bikeApp.model.ServiceState;
-import edu.curtin.oose.bikeApp.view.*;
-import java.io.*;
+import edu.curtin.oose.bikeApp.view.FileObserver;
 
 public class BikeStore {
     private int cash = 15000;
@@ -29,9 +30,10 @@ public class BikeStore {
     private int totalFailures = 0;
     private final FileObserver fileOb;
 
-    public BikeStore(FileWriter inFW)
+    @Inject
+    public BikeStore(FileObserver inFileOb)
     {
-        fileOb = new FileObserver(inFW);
+        fileOb = inFileOb;
     }
 
     public FileObserver getOb()
@@ -154,37 +156,38 @@ public class BikeStore {
     public void holdBike(Bike bike)
     {
         String custEmail = bike.getEmail().trim();
-        if(heldBikes.containsKey(custEmail))
-        {
-            List<Bike> preExistingBikes = heldBikes.get(custEmail);
-            for(Bike existingBike : preExistingBikes)
+            if(heldBikes.containsKey(custEmail))
             {
-                if(existingBike.getBikeID().equals(bike.getBikeID()))
+                List<Bike> preExistingBikes = heldBikes.get(custEmail);
+                for(Bike existingBike : preExistingBikes)
                 {
-                    // bike is already being serviced
-                    LOG.severe("Bike is already being held");
-                    return;
+                    if(existingBike.getBikeID().equals(bike.getBikeID()))
+                    {
+                        // bike is already being serviced
+                        LOG.severe("Bike is already being held");
+                        return;
+                    }
                 }
+                heldBikes.get(custEmail).add(bike);
+                
             }
-            heldBikes.get(custEmail).add(bike);
+            else
+            {
+                List<Bike> custBikes = new ArrayList<>();
+                custBikes.add(bike);
+                heldBikes.put(custEmail, custBikes);
+            }
+
+            if(bike.getState() instanceof AvailableState)
+            {
+                availableBikes -= 1;
+            }
+
             
-        }
-        else
-        {
-            List<Bike> custBikes = new ArrayList<>();
-            custBikes.add(bike);
-            heldBikes.put(custEmail, custBikes);
-        }
+            bike.putOnHold();
 
-        if(bike.getState() instanceof AvailableState)
-        {
-            availableBikes -= 1;
-        }
-
-        
-        bike.putOnHold();
-
-        LOG.log(Level.INFO, "Bike with ID {0} added to Held List", bike.getBikeID());
+            LOG.log(Level.INFO, "Bike with ID {0} added to Held List", bike.getBikeID());
+      
 
     }
 
